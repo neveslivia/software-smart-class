@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.smart.Controllers.Transicao.TelaController">
+   <top>
+      <AnchorPane prefHeight="57.0" prefWidth="700.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="700.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/SmartClassLogoFundoAzul.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Text fill="#ff5d22" strokeType="OUTSIDE" strokeWidth="0.0" text="Smart Class" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="13.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <Text fill="#ff5d22" strokeType="OUTSIDE" strokeWidth="0.0" text="Docentes" wrappingWidth="162.19512939453125">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </HBox.margin>
+                           <effect>
+                              <DropShadow height="45.18" radius="21.905" width="44.44">
+                                 <color>
+                                    <Color opacity="0.28244274854660034" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="399.0">
+                     <children>
+                        <Button fx:id="AcessarDisciplinasP" mnemonicParsing="false" onAction="#AcessarDisciplinasP" prefWidth="80.0" style="-fx-background-color: #63b9eb; -fx-background-radius: 50px;" text="Disciplinas" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.347328245639801" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="5.0" right="5.0" top="30.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="AcessarCursosP" mnemonicParsing="false" onAction="#AcessarCursosP" prefWidth="80.0" style="-fx-background-color: #63b9eb; -fx-background-radius: 50px;" text="Cursos" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.347328245639801" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="5.0" right="5.0" top="30.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="AcessarBoletimP" mnemonicParsing="false" onAction="#AcessarBoletimP" prefWidth="80.0" style="-fx-background-color: #63b9eb; -fx-background-radius: 50px;" text="Boletins" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="5.0" right="5.0" top="30.0" />
+                           </HBox.margin>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.347328245639801" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                        <Button fx:id="retornoinicialP" mnemonicParsing="false" onAction="#retornoinicialP" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #b93e11; -fx-background-radius: 50px;" text="Desconectar" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="5.0" right="10.0" top="30.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.3435114622116089" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="411.0" prefWidth="700.0" style="-fx-background-color: #63b9eb;">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="102.0" prefWidth="680.0" style="-fx-background-color: white; -fx-background-radius: 30px;">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/aluno.png" />
+                           </image>
+                        </ImageView>
+                        <VBox prefHeight="97.0" prefWidth="405.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alunos" wrappingWidth="206.1951904296875">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <Line endX="-52.51423645019531" endY="-26.064682006835938" startX="328.071533203125" startY="-26.064680099487305" strokeWidth="2.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Line>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Administre os alunos do sistema: realize cadastros, edições, exclusões e consulte a lista completa de estudantes." wrappingWidth="371.1951904296875">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <Button fx:id="AcessarALUNOP" mnemonicParsing="false" onAction="#AcessarALUNOP" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Acessar" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </HBox.margin>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.3549618422985077" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.47328242659568787" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="102.0" prefWidth="680.0" style="-fx-background-color: white; -fx-background-radius: 30px;">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/turma.png" />
+                           </image>
+                        </ImageView>
+                        <VBox prefHeight="97.0" prefWidth="405.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Turmas" wrappingWidth="206.1951904296875">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <Line endX="-52.51423645019531" endY="-26.064682006835938" startX="328.071533203125" startY="-26.064680099487305" strokeWidth="2.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Line>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Organize as turmas com praticidade: crie, atualize, exclua e vizualize todas as turmas cadastradas no sistema." wrappingWidth="371.1951904296875">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <Button fx:id="AcessarTURMASP" mnemonicParsing="false" onAction="#AcessarTURMASP" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Acessar" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </HBox.margin>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.3549618422985077" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.47328245639801025" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+   </center>
+</BorderPane>

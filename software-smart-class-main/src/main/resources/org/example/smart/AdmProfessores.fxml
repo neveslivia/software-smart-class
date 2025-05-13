@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.smart.Controllers.Menu.MenuProfessorADMController">
+   <top>
+      <AnchorPane prefHeight="57.0" prefWidth="700.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="80.0" prefWidth="700.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/SmartClassLogoFundoAzul.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Text fill="#ff5d22" strokeType="OUTSIDE" strokeWidth="0.0" text="Smart Class" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="13.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="5.0" />
+                                 </VBox.margin>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dados dos professores" wrappingWidth="345.1951904296875">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.10305343568325043" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gerencie os professores com facilidade: cadastre, edite, remova e vizualize a lista completa de docentes." wrappingWidth="371.1951904296875">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" prefHeight="111.0" prefWidth="226.0">
+                     <children>
+                        <Button fx:id="AcessarHomeProfessor" mnemonicParsing="false" onAction="#AcessarHomeProfessor" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #63b9eb; -fx-background-radius: 50px;" text="Home" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.3435114622116089" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="411.0" prefWidth="700.0" style="-fx-background-color: #63b9eb;">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="403.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="200.0" right="200.0" top="30.0" />
+                     </VBox.margin>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/refresh.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="AcessarAtualizarProfessor" mnemonicParsing="false" onAction="#AcessarAtualizarProfessor" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Atualizar" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.3435114622116089" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/add.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="AcessarAdicionarProfessor" mnemonicParsing="false" onAction="#AcessarAdicionarProfessor" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Adicionar" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.3435114622116089" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/trash.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="AcessarREMOVERPROFESSOR" mnemonicParsing="false" onAction="#AcessarREMOVERPROFESSOR" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Remover" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color opacity="0.3435114622116089" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                     <effect>
+                        <DropShadow height="67.42" radius="33.94" width="70.34">
+                           <color>
+                              <Color opacity="0.27099236845970154" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </HBox>
+                  <TreeTableView fx:id="TreeTableViewProfessores" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TreeTableColumn fx:id="col_ID" text="ID" />
+                      <TreeTableColumn fx:id="col_Nome" prefWidth="102.0" text="Nome" />
+                        <TreeTableColumn fx:id="col_Disciplina" prefWidth="117.0" text="Disciplina" />
+                        <TreeTableColumn fx:id="col_Email" minWidth="0.0" prefWidth="117.0" text="Email" />
+                        <TreeTableColumn fx:id="col_Telefone" minWidth="9.0" prefWidth="135.0" text="Telefone" />
+                        <TreeTableColumn fx:id="col_CPF" prefWidth="88.0" text="CPF" />
+                    </columns>
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" />
+                     </VBox.margin>
+                     <effect>
+                        <DropShadow height="56.17" radius="27.5875" width="56.18">
+                           <color>
+                              <Color opacity="0.3129771053791046" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </TreeTableView>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+   </center>
+</BorderPane>

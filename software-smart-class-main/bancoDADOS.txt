@@ -1,0 +1,100 @@
+CREATE DATABASE sistemaacademico;
+USE sistemaacademico;
+
+
+CREATE TABLE professor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    disciplina VARCHAR(100),
+    email VARCHAR(100),
+    telefone VARCHAR(20),
+    cpf CHAR(11),
+    senha VARCHAR(8) NOT NULL UNIQUE
+);
+
+INSERT INTO professor (nome, disciplina, email, telefone, cpf, senha) VALUES ('Carlos Eduardo Silva', 'Matemática', 'carlos.silva@escola.com', '(41) 98765-4321', '12345678901', 'abc12345');
+
+create table administracao(
+    id_administracao INT AUTO_INCREMENT PRIMARY KEY,
+    senha varchar(8) NOT NULL UNIQUE
+);
+
+insert into administracao(senha) value
+('adm123');
+
+CREATE TABLE curso (
+    id_curso INT AUTO_INCREMENT PRIMARY KEY,
+    nome_curso VARCHAR(100) NOT NULL,
+    descricao TEXT
+);
+
+CREATE TABLE turma (
+    id_turma INT AUTO_INCREMENT PRIMARY KEY,
+    nome_turma VARCHAR(50) NOT NULL,
+    ano_letivo YEAR NOT NULL,
+     id_curso INT NOT NULL,
+    FOREIGN KEY (id_curso) REFERENCES curso(id_curso)
+);
+
+ 
+CREATE TABLE  disciplina(
+    id_disciplina INT AUTO_INCREMENT PRIMARY KEY,
+    nome_disciplina VARCHAR(100),
+    id_curso INT NOT NULL,
+    FOREIGN KEY (id_curso) REFERENCES curso(id_curso)
+);
+
+CREATE TABLE aluno (
+    id_aluno INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    data_nascimento DATE,
+    email VARCHAR(100),
+    telefone VARCHAR(20),
+    cpf VARCHAR(11) NOT NULL UNIQUE,
+    id_turma INT NOT NULL,
+FOREIGN KEY (id_turma) REFERENCES turma(id_turma)
+);
+
+CREATE TABLE boletim (
+    id_boletim INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    id_aluno INT NOT NULL,
+    id_turma INT NOT NULL,
+    id_disciplina INT NOT NULL,
+    nota DECIMAL(5,2) NOT NULL,  
+    situacao ENUM('APROVADO', 'REPROVADO','RECUPERACAO'),
+    FOREIGN KEY (id_aluno) REFERENCES aluno(id_aluno),
+    FOREIGN KEY (id_turma) REFERENCES turma(id_turma),
+FOREIGN KEY (id_disciplina) REFERENCES disciplina(id_disciplina)
+);
+
+-- Passo 1: Inserir dados na tabela turma
+INSERT INTO turma (nome_turma, ano_letivo, id_curso)
+VALUES ('1º Ano A', 2024, 1);
+
+INSERT INTO turma (nome_turma, ano_letivo, id_curso)
+VALUES ('Turma A - Informática', 2024, 1);
+
+-- Passo 2: Inserir dados na tabela curso
+INSERT INTO curso (nome_curso, descricao)
+VALUES
+  ('Enfermagem', 'Curso técnico em enfermagem'),            -- ID 2
+  ('Administração', 'Curso técnico em administração'),      -- ID 3
+  ('Eletrônica', 'Curso técnico em eletrônica'),            -- ID 4
+  ('Design Gráfico', 'Curso técnico em design gráfico');    -- ID 5
+
+-- Passo 3: Inserir dados na tabela disciplina
+INSERT INTO disciplina (nome_disciplina, id_curso)
+VALUES ('Matemática', 1);  -- id_curso precisa existir
+
+-- Passo 4: Inserir dados na tabela aluno
+INSERT INTO aluno (nome, data_nascimento, email, telefone, cpf, id_turma)
+VALUES ('Carlos Silva', '2005-01-15', 'carlos@email.com', '1234567890', '12345678901', 2); -- id_turma precisa existir
+
+-- Passo 5: Inserir dados na tabela boletim
+INSERT INTO boletim (id_aluno, id_turma, id_disciplina, nota, situacao)
+VALUES (3, 3, 1, 8.5, 'APROVADO'); -- id_aluno, id_turma e id_disciplina precisam existir
+
+
+INSERT INTO professor (nome, disciplina, email, telefone, cpf, senha)
+VALUES
+('João Silva', 'Matemática', 'joao.silva@email.com', '(11) 98765-4321', '12345678901', 'senha123');

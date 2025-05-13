@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.smart.Controllers.Remover.RemoverAlunoController">
+   <top>
+      <AnchorPane prefHeight="57.0" prefWidth="700.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="80.0" prefWidth="700.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/SmartClassLogoFundoAzul.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text fill="#ff5d22" strokeType="OUTSIDE" strokeWidth="0.0" text="Smart Class" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="5.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Remover dados de Aluno" wrappingWidth="345.1951904296875">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.10305343568325043" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gerencie os professores com facilidade: selecione o id e remova dados da lista completa de docentes." wrappingWidth="371.1951904296875">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#homeAlunoRemover" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #63b9eb; -fx-background-radius: 50px;" text="Home" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.3435114622116089" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <HBox.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="411.0" prefWidth="700.0" style="-fx-background-color: #63b9eb;">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="348.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="170.0" right="170.0" top="30.0" />
+                     </VBox.margin>
+                     <children>
+                        <TextField fx:id="tfID_ALUNO" promptText="ID" style="-fx-background-color: transparent; -fx-border-color: #c3bdba; -fx-border-width: 0px 0px 2px 0px;">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="btnRemoverALUNO" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Remover" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.3435114622116089" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                        <Button fx:id="btnAtualizarALUNOS" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #4ad13b; -fx-background-radius: 50px;" text="Atualizar" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.3435114622116089" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <effect>
+                        <DropShadow height="67.42" radius="33.94" width="70.34">
+                           <color>
+                              <Color opacity="0.27099236845970154" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </HBox>
+                  <TreeTableView fx:id="treeTableAlunos" prefHeight="200.0" prefWidth="200.0">
+                     <columns>
+                        <TreeTableColumn fx:id="col_ID_ALUNO" prefWidth="47.99999809265137" text="ID" />
+                        <TreeTableColumn fx:id="colnomeALUNO" prefWidth="101.33325958251953" text="Nome" />
+                        <TreeTableColumn fx:id="coldata_nascimento" prefWidth="135.99998474121094" text="data_nascimento" />
+                        <TreeTableColumn fx:id="colEmail_ALUNO" minWidth="0.0" prefWidth="101.33331298828125" text="Email" />
+                        <TreeTableColumn fx:id="colTelefone_ALUNO" minWidth="9.0" prefWidth="102.66671752929688" text="Telefone" />
+                        <TreeTableColumn fx:id="colCpf_ALUNO" prefWidth="79.3333740234375" text="CPF" />
+                        <TreeTableColumn fx:id="col_ID_Turma" prefWidth="72.6666259765625" text="ID_Turma" />
+                     </columns>
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" />
+                     </VBox.margin>
+                     <effect>
+                        <DropShadow height="56.17" radius="27.5875" width="56.18">
+                           <color>
+                              <Color opacity="0.3129771053791046" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </TreeTableView>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+   </center>
+</BorderPane>
