@@ -53,15 +53,10 @@ public class CadastrarCursoController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         configurarColunas();
-        try {
-            carregarCursos();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        carregarCursos();
 
-        bt_cadastrar.setOnAction(this::cadastrarCurso);
         bt_fechar.setOnAction(e -> fecharTela());
-        bt_home.setOnAction(this::irParaHome);
+
     }
 
     private void configurarColunas() {
@@ -85,21 +80,17 @@ public class CadastrarCursoController implements Initializable{
         curso.setDescricao(descricao);
 
 
-        try {
-            boolean sucesso = cursoDAO.adicionarCurso(curso);
-            if (sucesso) {
-                mostrarAlerta("Sucesso", "Curso cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-                limparCampos();
-                carregarCursos(); // <- atualiza a tabela
-            } else {
-                mostrarAlerta("Erro", "O curso não pôde ser cadastrado. Tente novamente.", Alert.AlertType.ERROR);
-            }
-        } catch (SQLException e) {
-            mostrarAlerta("Erro de banco", "Erro ao acessar o banco de dados: " + e.getMessage(), Alert.AlertType.ERROR);
+        boolean sucesso = cursoDAO.adicionarCurso(curso);
+        if (sucesso) {
+            mostrarAlerta("Sucesso", "Curso cadastrado com sucesso!", Alert.AlertType.INFORMATION);
+            limparCampos();
+            carregarCursos(); // <- atualiza a tabela
+        } else {
+            mostrarAlerta("Erro", "O curso não pôde ser cadastrado. Tente novamente.", Alert.AlertType.ERROR);
         }
     }
 
-    private void carregarCursos() throws SQLException {
+    private void carregarCursos() {
         List<Curso> cursos = cursoDAO.listarCursos();
         TreeItem<Curso> raiz = new TreeItem<>();
         for (Curso curso : cursos) {
@@ -122,15 +113,17 @@ public class CadastrarCursoController implements Initializable{
         alerta.showAndWait();
     }
 
+    @FXML
     private void fecharTela() {
         Stage stage = (Stage) bt_fechar.getScene().getWindow();
         stage.close();
     }
 
 
-    private void irParaHome(javafx.event.ActionEvent event) {
+    @FXML
+    public void AcessarHomeCadastrarCurso(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/org/example/smart/homeADM.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/org/example/smart/AdmCusos.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

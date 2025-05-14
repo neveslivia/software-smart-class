@@ -53,7 +53,7 @@ public class CadastroTurmaController {
     public void initialize() {
         try {
             Connection conn = Conexao.getConexao();
-            cursoDAO = new CursoDAO(conn);
+            cursoDAO = new CursoDAO(); // ✅ Agora usa o construtor padrão do CursoDAO
             turmaDAO = new TurmaDAO(conn);
 
             configurarColunas();
@@ -71,29 +71,24 @@ public class CadastroTurmaController {
     }
 
     private void configurarFormatadores() {
-        // Ano letivo: apenas 4 dígitos
         txt_AnoLetivo.setTextFormatter(new TextFormatter<>(change -> {
             return change.getControlNewText().matches("\\d{0,4}") ? change : null;
         }));
 
-        // ID do curso: apenas números até 10 dígitos
         txt_IDCurso.setTextFormatter(new TextFormatter<>(change -> {
             return change.getControlNewText().matches("\\d{0,10}") ? change : null;
         }));
 
-        // Nome da turma: até 50 caracteres
         txt_NomeTurma.setTextFormatter(new TextFormatter<>(change -> {
             return change.getControlNewText().length() <= 50 ? change : null;
         }));
     }
 
     private void configurarColunas() {
-        // Cursos
         Col_ID_CursoTURMA.setCellValueFactory(cell -> new SimpleStringProperty(String.valueOf(cell.getValue().getValue().getId())));
         Col_Nome_CursoTURMA.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getValue().getNome()));
         Col_DescricaoCurso_TURMA.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getValue().getDescricao()));
 
-        // Turmas
         Col_IDCadastro_TURMA.setCellValueFactory(cell -> new SimpleStringProperty(String.valueOf(cell.getValue().getValue().getId())));
         Col_NomeTurma_TURMA.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getValue().getNome()));
         Col_AnoLetivo_TURMA.setCellValueFactory(cell -> new SimpleStringProperty(String.valueOf(cell.getValue().getValue().getAnoLetivo())));
@@ -102,7 +97,6 @@ public class CadastroTurmaController {
 
     private void carregarTabelas() {
         try {
-            // Cursos
             List<Curso> cursos = cursoDAO.listarCursos();
             TreeItem<Curso> rootCursos = new TreeItem<>();
             for (Curso curso : cursos) {
@@ -111,7 +105,6 @@ public class CadastroTurmaController {
             TreeTableViewCursoTurma.setRoot(rootCursos);
             TreeTableViewCursoTurma.setShowRoot(false);
 
-            // Turmas
             List<Turma> turmas = turmaDAO.listarTurmas();
             TreeItem<Turma> rootTurmas = new TreeItem<>();
             for (Turma turma : turmas) {
@@ -180,5 +173,4 @@ public class CadastroTurmaController {
             e.printStackTrace();
         }
     }
-
 }

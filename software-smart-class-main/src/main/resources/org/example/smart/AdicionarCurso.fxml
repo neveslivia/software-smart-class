@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.smart.Controllers.Cadastro.CadastrarCursoController">
+    <top>
+        <AnchorPane prefHeight="57.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="80.0" prefWidth="700.0">
+                    <children>
+                        <VBox alignment="TOP_CENTER" prefWidth="100.0">
+                            <children>
+                                <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/SmartClassLogoFundoAzul.png" />
+                                    </image>
+                                    <VBox.margin>
+                                        <Insets left="5.0" right="5.0" top="5.0" />
+                                    </VBox.margin>
+                                </ImageView>
+                                <Text fill="#ff5d22" text="Smart Class" textAlignment="CENTER">
+                                    <font>
+                                        <Font name="Arial Rounded MT Bold" size="13.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" prefWidth="100.0">
+                            <children>
+                                <Text text="Cadastro de Curso" wrappingWidth="407.6962890625">
+                                    <font>
+                                        <Font name="System Bold" size="25.0" />
+                                    </font>
+                                    <effect>
+                                        <DropShadow>
+                                            <color><Color opacity="0.1" /></color>
+                                        </DropShadow>
+                                    </effect>
+                                </Text>
+                                <Text text="Registre um novo curso no sistema:">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                            <HBox.margin>
+                                <Insets bottom="10.0" left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </VBox>
+                        <Button fx:id="bt_home" onAction="#AcessarHomeCadastrarCurso" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #63b9eb; -fx-background-radius: 50px;" text="Home" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="bt_fechar" onAction="#fecharTela" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #b93e11;" text="x">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="10.0" top="10.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <AnchorPane style="-fx-background-color: white;">
+            <children>
+                <VBox alignment="CENTER_LEFT" prefHeight="409.0" prefWidth="700.0" style="-fx-background-color: #63b9eb;">
+                    <children>
+                        <VBox prefWidth="620.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+                            <VBox.margin>
+                                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                            </VBox.margin>
+                            <children>
+                                <HBox alignment="TOP_CENTER">
+                                    <children>
+                                        <VBox alignment="CENTER" prefHeight="255.0" prefWidth="287.0">
+                                            <children>
+                                                <TextField fx:id="txt_nomeCurso" promptText="Nome do Curso" style="-fx-background-color: transparent; -fx-border-color: #c6c3c1; -fx-border-width: 0 0 2 0;">
+                                                    <VBox.margin>
+                                                        <Insets bottom="10.0" left="40.0" right="40.0" top="40.0" />
+                                                    </VBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="txt_descricao" promptText="Descrição" style="-fx-background-color: transparent; -fx-border-color: #c6c3c1; -fx-border-width: 0 0 2 0;">
+                                                    <VBox.margin>
+                                                        <Insets bottom="40.0" left="40.0" right="40.0" />
+                                                    </VBox.margin>
+                                                </TextField>
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="CENTER" prefWidth="300.0">
+                                            <children>
+                                                <ImageView fitHeight="150.0" fitWidth="184.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../images/register.png" />
+                                                    </image>
+                                                    <VBox.margin>
+                                                        <Insets top="20.0" />
+                                                    </VBox.margin>
+                                                </ImageView>
+                                                <Button fx:id="bt_cadastrar" onAction="#cadastrarCurso" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 15px;" text="Cadastrar" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                    <VBox.margin>
+                                                        <Insets bottom="30.0" top="30.0" />
+                                                    </VBox.margin>
+                                                </Button>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                  <TreeTableView fx:id="TableCursos" prefHeight="118.0" prefWidth="665.0">
+                    <columns>
+                      <TreeTableColumn fx:id="colIdCurso" prefWidth="75.0" text="ID Curso" />
+                      <TreeTableColumn fx:id="colNomeCurso" prefWidth="75.0" text="Nome Curso" />
+                        <TreeTableColumn fx:id="colDescricao" prefWidth="75.0" text="Descrição" />
+                    </columns>
+                  </TreeTableView>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

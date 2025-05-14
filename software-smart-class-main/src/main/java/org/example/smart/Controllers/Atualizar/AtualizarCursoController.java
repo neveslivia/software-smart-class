@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,13 +14,15 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Curso;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class AtualizarCursoController {
+public class AtualizarCursoController implements Initializable {
 
 
         @FXML
@@ -66,20 +69,7 @@ public class AtualizarCursoController {
 
         private final CursoDAO cursoDAO = new CursoDAO();
 
-        @FXML
-        public void initialize() throws SQLException {
-            configurarTabela();
-            carregarCursos();
-            btAtualizarCurso.setOnAction(e -> {
-                try {
-                    carregarCursos();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            });
-            btFinalizarCurso.setOnAction(this::AtualizarCurso);
-            AcessarHomeCurso.setOnAction( this::AcessarHomeAtualizarTurma);
-        }
+
 
         private void configurarTabela() {
             colIdCursoAtualizar.setCellValueFactory(param -> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getId())));
@@ -99,6 +89,7 @@ public class AtualizarCursoController {
             TableCursosAtualizar.setShowRoot(false);
         }
 
+        @FXML
         private void AtualizarCurso(ActionEvent event) {
             try {
                 int id = Integer.parseInt(txtIDCurso.getText().trim());
@@ -137,8 +128,7 @@ public class AtualizarCursoController {
             alerta.setContentText(mensagem);
             alerta.showAndWait();
         }
-
-
+        @FXML
         public void AcessarHomeAtualizarTurma(ActionEvent event) {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/org/example/smart/homeADM.fxml"));
@@ -150,6 +140,17 @@ public class AtualizarCursoController {
                 e.printStackTrace();
             }
         }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<Curso> cursos = cursoDAO.listarCursos();
+        TreeItem<Curso> root = new TreeItem<>();
+        for (Curso curso : cursos) {
+            root.getChildren().add(new TreeItem<>(curso));
+        }
+        TableCursosAtualizar.setRoot(root);
+        TableCursosAtualizar.setShowRoot(false);
     }
+}
 
 

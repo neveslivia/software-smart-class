@@ -58,19 +58,13 @@ public class TelaCursoController implements Initializable {
         curso.setNome(nome);
         curso.setDescricao(descricao);
 
-        try {
-            boolean sucesso = cursoDAO.adicionarCurso(curso);
+        boolean sucesso = cursoDAO.adicionarCurso(curso);
 
-            if (sucesso) {
-                mostrarAlerta("Sucesso", "Curso cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-                limparCampos();
-            } else {
-                mostrarAlerta("Erro", "O curso não pôde ser cadastrado. Tente novamente.", Alert.AlertType.ERROR);
-            }
-
-        } catch (SQLException e) {
-            mostrarAlerta("Erro de banco", "Erro ao acessar o banco de dados: " + e.getMessage(), Alert.AlertType.ERROR);
-            e.printStackTrace();
+        if (sucesso) {
+            mostrarAlerta("Sucesso", "Curso cadastrado com sucesso!", Alert.AlertType.INFORMATION);
+            limparCampos();
+        } else {
+            mostrarAlerta("Erro", "O curso não pôde ser cadastrado. Tente novamente.", Alert.AlertType.ERROR);
         }
 
     }

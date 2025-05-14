@@ -57,7 +57,7 @@ public class AtualizarTurmaController {
         try {
             Connection conn = Conexao.getConexao();
             turmaDAO = new TurmaDAO(conn);
-            cursoDAO = new CursoDAO(conn);
+            cursoDAO = new CursoDAO(); // ✅ Agora usa o construtor padrão da CursoDAO
 
             configurarColunas();
             carregarTabelas();
@@ -69,7 +69,6 @@ public class AtualizarTurmaController {
             btn_FinalizarAtualizar_Turma.setOnAction(event -> finalizarAtualizacao());
             btn_AtualizarBanco_AtTurma.setOnAction(event -> carregarTabelas());
 
-            // Restrição: ano letivo deve ser um número de até 4 dígitos
             txtAnoLetivo_Turma_Atualizar.setTextFormatter(new TextFormatter<>(change -> {
                 String novoTexto = change.getControlNewText();
                 if (!novoTexto.matches("\\d{0,4}")) {

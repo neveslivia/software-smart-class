@@ -56,13 +56,6 @@ public class RemoverCursoController implements Initializable {
         configurarColunas();
         loadCursos();
 
-        btRemoverCurso.setOnAction(event -> {
-            try {
-                removerCurso();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
         bt_atualizarCurso.setOnAction(event -> loadCursos());
     }
 
@@ -78,6 +71,7 @@ public class RemoverCursoController implements Initializable {
                 new SimpleStringProperty(param.getValue().getValue().getDescricao()));
     }
 
+    @FXML
     private void loadCursos() {
         try {
             List<Curso> cursos = cursoDAO.listarCursos();
@@ -98,6 +92,7 @@ public class RemoverCursoController implements Initializable {
         }
     }
 
+    @FXML
     private void removerCurso() throws SQLException {
         TreeItem<Curso> selectedItem = TableCursos.getSelectionModel().getSelectedItem();
 
