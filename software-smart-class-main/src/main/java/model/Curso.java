@@ -6,13 +6,16 @@ public class Curso {
     private String nome;
     private String descricao;
 
-    public Curso(int id, String nome, String descricao) {
-        this.id = id;
+    public Curso( String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
 
-    public Curso() {
+
+    public Curso(int id, String nome, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
     }
 
     public int getId() {

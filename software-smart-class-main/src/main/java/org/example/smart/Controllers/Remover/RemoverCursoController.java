@@ -1,12 +1,11 @@
 package org.example.smart.Controllers.Remover;
 
+import Banco.Conexao;
 import DAO.CursoDAO;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,134 +13,133 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Curso;
 
-import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
-public class RemoverCursoController implements Initializable {
-
-    @FXML
-    private TreeTableView<Curso> TableCursos;
-
-    @FXML
-    private TreeTableColumn<Curso, String> colDescricaoCurso;
-
-    @FXML
-    private TreeTableColumn<Curso, Integer> colIdCurso;
-
-    @FXML
-    private TreeTableColumn<Curso, String> colNome;
-    @FXML
-    private Button AcessarHOME_Cursos;
-
-    @FXML
-    private Button btAdicionar;
+public class RemoverCursoController {
 
     @FXML
     private Button btRemoverCurso;
 
     @FXML
-    private Button bt_atualizarCurso;
+    private TreeTableColumn<Curso, String> colDescricao;
 
     @FXML
-    private TextField txtIdCurso;
+    private TreeTableColumn<Curso,String > colIdCurso;
+
+    @FXML
+    private TreeTableColumn<Curso, String> colNomeCurso;
+
+    @FXML
+    private TreeTableView<Curso> TreeTableViewRemoverCurso;
+
+
 
     private CursoDAO cursoDAO;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        cursoDAO = new CursoDAO();
-        configurarColunas();
-        loadCursos();
+    @FXML
+    public void initialize() {
+        try {
+            Connection conn = Conexao.getConexao();
+            cursoDAO= new CursoDAO(conn);
 
-        btRemoverCurso.setOnAction(event -> {
-            try {
-                removerCurso();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        bt_atualizarCurso.setOnAction(event -> loadCursos());
+            configurarColunas();
+            carregarTabela();
+
+            btRemoverCurso.setOnAction(this::removerCursoSelecionado);
+        } catch (SQLException e) {
+            mostrarAlerta("Erro ao conectar", e.getMessage());
+        }
     }
-
 
     private void configurarColunas() {
-        colIdCurso.setCellValueFactory(param ->
-                new SimpleIntegerProperty(param.getValue().getValue().getId()).asObject());
-
-        colNome.setCellValueFactory(param ->
-                new SimpleStringProperty(param.getValue().getValue().getNome()));
-
-        colDescricaoCurso.setCellValueFactory(param ->
-                new SimpleStringProperty(param.getValue().getValue().getDescricao()));
+        colIdCurso.setCellValueFactory(cell -> new SimpleStringProperty(String.valueOf(cell.getValue().getValue().getId())));
+        colNomeCurso.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getValue().getNome()));
+        colDescricao.setCellValueFactory(cell -> new SimpleStringProperty(String.valueOf(cell.getValue().getValue().getDescricao())));
     }
 
-    private void loadCursos() {
-        try {
-            List<Curso> cursos = cursoDAO.listarCursos();
-
-            TreeItem<Curso> rootItem = new TreeItem<>();
-            for (Curso curso : cursos) {
-                rootItem.getChildren().add(new TreeItem<>(curso));
-            }
-
-            TableCursos.setRoot(rootItem);
-            TableCursos.setShowRoot(false);
-            rootItem.setExpanded(true);
-            TableCursos.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
-
-        } catch (Exception e) {
-            exibirAlerta("Erro ao carregar cursos", "Erro ao carregar os cursos: " + e.getMessage(), Alert.AlertType.ERROR);
-            e.printStackTrace();
+    private void carregarTabela() {
+        List<Curso> cursos = cursoDAO.listarCursos();
+        TreeItem<Curso> root = new TreeItem<>();
+        for (Curso curso: cursos) {
+            root.getChildren().add(new TreeItem<>(curso));
         }
+        TreeTableViewRemoverCurso.setRoot(root);
+        TreeTableViewRemoverCurso.setShowRoot(false);
     }
 
-    private void removerCurso() throws SQLException {
-        TreeItem<Curso> selectedItem = TableCursos.getSelectionModel().getSelectedItem();
+    @FXML
+    private void removerCursoSelecionado(ActionEvent event) {
+        TreeItem<Curso> itemSelecionado = TreeTableViewRemoverCurso.getSelectionModel().getSelectedItem();
 
-        if (selectedItem != null) {
-            Curso curso = selectedItem.getValue();
-            confirmarERemover(curso.getId());
-        } else {
-            String idTexto = txtIdCurso.getText().trim();
-            if (idTexto.isEmpty()) {
-                exibirAlerta("Atenção", "Informe um ID ou selecione um curso na tabela.", Alert.AlertType.WARNING);
-                return;
-            }
-
-            try {
-                int id = Integer.parseInt(idTexto);
-                confirmarERemover(id);
-            } catch (NumberFormatException | SQLException e) {
-                exibirAlerta("Erro", "ID inválido. Digite um número válido.", Alert.AlertType.ERROR);
-            }
+        if (itemSelecionado == null) {
+            mostrarAlerta("Nenhuma seleção", "Selecione um Curso na tabela para remover.");
+            return;
         }
-    }
 
-    private void confirmarERemover(int id) throws SQLException {
+       Curso curso= itemSelecionado.getValue();
+        int idCurso = curso.getId();
+
         Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacao.setTitle("Confirmação");
-        confirmacao.setHeaderText("Remover Curso");
-        confirmacao.setContentText("Tem certeza que deseja remover o curso com ID " + id + "?");
+        confirmacao.setTitle("Confirmação de Exclusão");
+        confirmacao.setHeaderText("Tem certeza que deseja remover a turma?");
+        confirmacao.setContentText(
+                "Todos os boletins e alunos relacionados a esta turma também serão removidos.\n\n"
+                        + "Turma: " + curso.getNome()
+                        + "\nID: " + idCurso
+        );
 
         Optional<ButtonType> resultado = confirmacao.showAndWait();
 
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            boolean removido = cursoDAO.removerCurso(id);
-            if (removido) {
-                exibirAlerta("Sucesso", "Curso removido com sucesso!", Alert.AlertType.INFORMATION);
-                loadCursos();
-                txtIdCurso.clear();
-            } else {
-                exibirAlerta("Erro", "Curso com ID " + id + " não encontrado.", Alert.AlertType.ERROR);
+            try {
+                excluirCursoComDependencias(idCurso);
+                mostrarAlerta("Sucesso", "Turma e dependências removidas com sucesso.");
+                carregarTabela();
+            } catch (SQLException e) {
+                mostrarAlerta("Erro ao remover", e.getMessage());
             }
         }
     }
 
-    private void exibirAlerta(String titulo, String mensagem, Alert.AlertType tipo) {
-        Alert alerta = new Alert(tipo);
+    private void excluirCursoComDependencias(int idCurso) throws SQLException {
+        Connection conn = Conexao.getConexao();
+
+        try {
+            conn.setAutoCommit(false);
+
+
+            try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM turma WHERE id_curso = ?")) {
+                stmt.setInt(1, idCurso);
+                stmt.executeUpdate();
+            }
+
+            try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM disciplina WHERE id_curso = ?")) {
+                stmt.setInt(1, idCurso);
+                stmt.executeUpdate();
+            }
+
+            try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM curso WHERE id_curso = ?")) {
+                stmt.setInt(1, idCurso);
+                stmt.executeUpdate();
+            }
+
+
+            conn.commit();
+
+        } catch (SQLException e) {
+            conn.rollback();
+            throw e;
+        } finally {
+            conn.setAutoCommit(true);
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String mensagem) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);
         alerta.setContentText(mensagem);
@@ -149,7 +147,7 @@ public class RemoverCursoController implements Initializable {
     }
 
     @FXML
-    public void homeAlunoRemover(ActionEvent event) {
+    public void AcessarHomeRemoverCursos(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/org/example/smart/homeADM.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -161,5 +159,6 @@ public class RemoverCursoController implements Initializable {
         }
     }
 }
+
 
 

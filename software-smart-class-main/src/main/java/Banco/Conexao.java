@@ -8,9 +8,7 @@ public class Conexao {
 
     private static final String URL = "jdbc:mysql://localhost:3306/sistemaacademico";
     private static final String USUARIO = "root";
-    private static final String SENHA = null;
-
-    // Método que retorna uma conexão com o banco
+    private static final String SENHA = "root";
     public static Connection getConexao() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Força o carregamento do driver

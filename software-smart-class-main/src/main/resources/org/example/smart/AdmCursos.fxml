@@ -65,7 +65,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </VBox>
-                  <Button fx:id="AcessarHOME_Cursos" mnemonicParsing="false" onAction="#AcessarHOME_Cursos" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #63b9eb; -fx-background-radius: 50px;" text="Home" textFill="WHITE">
+                  <Button fx:id="retornarHomeCursos" mnemonicParsing="false" onAction="#retornarHomeCursos" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #63b9eb; -fx-background-radius: 50px;" text="Home" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -113,7 +113,7 @@
                                     <Image url="@../images/refresh.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="bt_atualizarCurso" mnemonicParsing="false" onAction="#bt_atualizarCurso" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Atualizar" textFill="WHITE">
+                              <Button fx:id="AcessarAtualizarCurso" mnemonicParsing="false" onAction="#AcessarAtualizarCurso" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Atualizar" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -140,7 +140,7 @@
                                     <Image url="@../images/add.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="btAdicionarCurso" mnemonicParsing="false" onAction="#btAdicionarCurso" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Adicionar" textFill="WHITE">
+                              <Button fx:id="AcessarAdicionarCurso" mnemonicParsing="false" onAction="#AcessarAdicionarCurso" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Adicionar" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -167,7 +167,7 @@
                                     <Image url="@../images/trash.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="btRemoverCurso" mnemonicParsing="false" onAction="#btRemoverCurso" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Remover" textFill="WHITE">
+                              <Button fx:id="AcessarRemoverCurso" mnemonicParsing="false" onAction="#AcessarRemoverCurso" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff5d22; -fx-background-radius: 50px;" text="Remover" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -196,11 +196,11 @@
                         </DropShadow>
                      </effect>
                   </HBox>
-                  <TreeTableView prefHeight="200.0" prefWidth="200.0">
+                  <TreeTableView fx:id="TreeTableViewCursoMenu" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TreeTableColumn prefWidth="122.0" text="ID Curso" />
-                        <TreeTableColumn prefWidth="225.0" text="Nome" />
-                        <TreeTableColumn prefWidth="292.0" text="Descrição" />
+                      <TreeTableColumn fx:id="idCurso" prefWidth="122.0" text="ID Curso" />
+                        <TreeTableColumn fx:id="nomeCurso" prefWidth="225.0" text="Nome" />
+                        <TreeTableColumn fx:id="descricaoCurso" prefWidth="292.0" text="Descrição" />
                     </columns>
                      <VBox.margin>
                         <Insets bottom="30.0" left="30.0" right="30.0" />

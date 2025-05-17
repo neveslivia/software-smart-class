@@ -1,6 +1,8 @@
 package org.example.smart.Controllers.Cadastro;
 
+import Banco.Conexao;
 import DAO.CursoDAO;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,123 +16,127 @@ import javafx.stage.Stage;
 import model.Curso;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CadastrarCursoController implements Initializable{
 
     @FXML
-    private TreeTableView<Curso> TableCursos;
+    private TreeTableColumn<Curso, String> Col_DescricaoCurso;
 
     @FXML
-    private Button bt_cadastrar;
+    private TreeTableColumn<Curso, String> Col_IDCurso;
 
     @FXML
-    private Button bt_fechar;
+    private TreeTableColumn<Curso, String> Col_NomeCurso;
 
     @FXML
-    private Button bt_home;
+    private TreeTableView<Curso> TreeTableViewCurso;
 
     @FXML
-    private TreeTableColumn<Curso, String> colDescricao;
+    private Button btnAtualizarCadastroCurso;
 
     @FXML
-    private TreeTableColumn<Curso, Integer> colIdCurso;
+    private Button btnCadastrarCurso;
 
     @FXML
-    private TreeTableColumn<Curso, String> colNomeCurso;
+    private TextField txtDescricaoCurso;
 
     @FXML
-    private TextField txt_descricao;
+    private TextField txtNomeCurso;
 
-    @FXML
-    private TextField txt_nomeCurso;
-
-
-    private final CursoDAO cursoDAO = new CursoDAO();
+    CursoDAO cursoDAO;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        configurarColunas();
         try {
-            carregarCursos();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            Connection conn = Conexao.getConexao();
+            cursoDAO = new CursoDAO(conn);
 
-        bt_cadastrar.setOnAction(this::cadastrarCurso);
-        bt_fechar.setOnAction(e -> fecharTela());
-        bt_home.setOnAction(this::irParaHome);
+
+            configurarColunas();
+            carregarTabelas();
+
+            btnCadastrarCurso.setOnAction(e -> cadastrarCurso());
+            btnAtualizarCadastroCurso.setOnAction(e -> carregarTabelas());
+
+        } catch (SQLException e) {
+            mostrarAlerta("Erro ao conectar", e.getMessage());
+        }
     }
 
     private void configurarColunas() {
-        colIdCurso.setCellValueFactory(new TreeItemPropertyValueFactory<>("id"));
-        colNomeCurso.setCellValueFactory(new TreeItemPropertyValueFactory<>("nome"));
-        colDescricao.setCellValueFactory(new TreeItemPropertyValueFactory<>("descricao"));
+        Col_IDCurso.setCellValueFactory(cell -> new SimpleStringProperty(String.valueOf(cell.getValue().getValue().getId())));
+        Col_NomeCurso.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getValue().getNome()));
+        Col_DescricaoCurso.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getValue().getDescricao()));
+
     }
+
+
+    private void carregarTabelas() {
+        List<Curso> cursos = cursoDAO.listarCursos();
+        TreeItem<Curso> rootCursos = new TreeItem<>();
+        for (Curso curso : cursos) {
+            rootCursos.getChildren().add(new TreeItem<>(curso));
+        }
+        TreeTableViewCurso.setRoot(rootCursos);
+        TreeTableViewCurso.setShowRoot(false);
+
+
+    }
+
 
     @FXML
-    private void cadastrarCurso(ActionEvent actionEvent) {
-        String nome = txt_nomeCurso.getText().trim();
-        String descricao = txt_descricao.getText().trim();
-
-        if (nome.isEmpty() || descricao.isEmpty()) {
-            mostrarAlerta("Campos obrigatórios", "Preencha todos os campos antes de cadastrar.", Alert.AlertType.WARNING);
-            return;
-        }
-
-        Curso curso = new Curso();
-        curso.setNome(nome);
-        curso.setDescricao(descricao);
-
-
+    private void cadastrarCurso() {
         try {
-            boolean sucesso = cursoDAO.adicionarCurso(curso);
-            if (sucesso) {
-                mostrarAlerta("Sucesso", "Curso cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-                limparCampos();
-                carregarCursos(); // <- atualiza a tabela
-            } else {
-                mostrarAlerta("Erro", "O curso não pôde ser cadastrado. Tente novamente.", Alert.AlertType.ERROR);
-            }
-        } catch (SQLException e) {
-            mostrarAlerta("Erro de banco", "Erro ao acessar o banco de dados: " + e.getMessage(), Alert.AlertType.ERROR);
-        }
-    }
+            String nomeCurso = txtNomeCurso.getText().trim();
+            String descricaoCurso = txtDescricaoCurso.getText().trim();
 
-    private void carregarCursos() throws SQLException {
-        List<Curso> cursos = cursoDAO.listarCursos();
-        TreeItem<Curso> raiz = new TreeItem<>();
-        for (Curso curso : cursos) {
-            raiz.getChildren().add(new TreeItem<>(curso));
+            if (nomeCurso.isEmpty() || descricaoCurso.isEmpty()) {
+                mostrarAlerta("Campos obrigatórios", "Preencha todos os campos.");
+                return;
+            }
+
+
+            Curso novoCurso = new Curso(nomeCurso,descricaoCurso);
+            boolean sucesso = cursoDAO.adicionarCurso(novoCurso);
+
+            if (sucesso) {
+                mostrarAlerta("Sucesso", "Curso cadastrado com sucesso!");
+                limparCampos();
+                carregarTabelas();
+            } else {
+                mostrarAlerta("Erro", "Erro ao cadastrar curso.");
+            }
+
+        } catch (Exception e) {
+            mostrarAlerta("Erro ao cadastrar", e.getMessage());
         }
-        TableCursos.setRoot(raiz);
-        TableCursos.setShowRoot(false);
+
     }
 
     private void limparCampos() {
-        txt_nomeCurso.clear();
-        txt_descricao.clear();
+        txtNomeCurso.clear();
+        txtDescricaoCurso.clear();
     }
 
-    private void mostrarAlerta(String titulo, String mensagem, Alert.AlertType tipo) {
-        Alert alerta = new Alert(tipo);
+    private void mostrarAlerta(String titulo, String mensagem) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);
         alerta.setContentText(mensagem);
         alerta.showAndWait();
     }
 
-    private void fecharTela() {
-        Stage stage = (Stage) bt_fechar.getScene().getWindow();
-        stage.close();
-    }
 
 
-    private void irParaHome(javafx.event.ActionEvent event) {
+    @FXML
+    public void AcessarHomeCadastroCurso(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/org/example/smart/homeADM.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/org/example/smart/homeADM.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -139,5 +145,5 @@ public class CadastrarCursoController implements Initializable{
             e.printStackTrace();
         }
     }
-    }
+}
 

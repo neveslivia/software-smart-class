@@ -6,13 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class CursoApplication extends Application {
+import java.util.Objects;
+
+public class  CursoApplication extends Application {
     Stage janela;
     @Override
     public void start(Stage stage) throws Exception {
         janela = stage;
 
-        Parent tela = FXMLLoader.load(getClass().getResource("/org/example/smart/AdmCursos.fxml"));
+        Parent tela = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/org/example/smart/AdmCursos.fxml")));
 
         Scene scene = new Scene(tela);
         janela.setScene(scene);
