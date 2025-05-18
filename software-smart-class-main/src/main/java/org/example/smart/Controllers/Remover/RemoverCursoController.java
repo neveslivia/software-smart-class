@@ -76,7 +76,7 @@ public class RemoverCursoController {
         TreeItem<Curso> itemSelecionado = TreeTableViewRemoverCurso.getSelectionModel().getSelectedItem();
 
         if (itemSelecionado == null) {
-            mostrarAlerta("Nenhuma seleção", "Selecione um Curso na tabela para remover.");
+            mostrarAlerta("Nenhuma seleção", "Selecione um curso na tabela para remover.");
             return;
         }
 
@@ -85,10 +85,10 @@ public class RemoverCursoController {
 
         Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacao.setTitle("Confirmação de Exclusão");
-        confirmacao.setHeaderText("Tem certeza que deseja remover a turma?");
+        confirmacao.setHeaderText("Tem certeza que deseja remover o curso?");
         confirmacao.setContentText(
-                "Todos os boletins e alunos relacionados a esta turma também serão removidos.\n\n"
-                        + "Turma: " + curso.getNome()
+                "Todos os boletins e alunos relacionados a este curso também serão removidos.\n\n"
+                        + "Curso: " + curso.getNome()
                         + "\nID: " + idCurso
         );
 
@@ -97,7 +97,7 @@ public class RemoverCursoController {
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             try {
                 excluirCursoComDependencias(idCurso);
-                mostrarAlerta("Sucesso", "Turma e dependências removidas com sucesso.");
+                mostrarAlerta("Sucesso", "Curso e dependências removidas com sucesso.");
                 carregarTabela();
             } catch (SQLException e) {
                 mostrarAlerta("Erro ao remover", e.getMessage());
